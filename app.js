@@ -369,9 +369,25 @@ function bindFeed() {
 
   // Vodoravni swipe je namenoma onemogočen. Feed se premika samo gor/dol.
   // Zamenjava znamke je še vedno možna prek gumbov in tipk s puščicami.
+  let touchStartX = null, touchStartY = null;
+  feed.addEventListener('touchstart', e => {
+    if (e.touches.length !== 1) return;
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
   feed.addEventListener('touchmove', e => {
-    if (e.touches.length > 1) e.preventDefault();
+    if (e.touches.length !== 1 || touchStartX == null || touchStartY == null) return;
+    const dx = e.touches[0].clientX - touchStartX;
+    const dy = e.touches[0].clientY - touchStartY;
+    // Dovoli navpični scroll, vodoravni poteg pa popolnoma blokiraj.
+    if (Math.abs(dx) > Math.abs(dy)) e.preventDefault();
   }, { passive: false });
+  feed.addEventListener('touchend', () => {
+    touchStartX = touchStartY = null;
+  }, { passive: true });
+  feed.addEventListener('touchcancel', () => {
+    touchStartX = touchStartY = null;
+  }, { passive: true });
 
 }
 
