@@ -606,7 +606,7 @@ FA.renderAll = () => {
 function applyStatic() {
   document.documentElement.lang = LANG;
   $$('[data-i18n]').forEach(e => { if (e.dataset.sl === undefined) e.dataset.sl = e.textContent; e.textContent = t(e.dataset.sl); });
-  [['#nav-left', 'title', 'Prejšnja znamka'], ['#nav-up', 'title', 'Prejšnji izdelek'], ['#nav-down', 'title', 'Naslednji izdelek'], ['#nav-right', 'title', 'Naslednja znamka'],
+  [['#nav-left', 'title', 'Prejšnji izdelek'], ['#nav-up', 'title', 'Prejšnji izdelek'], ['#nav-down', 'title', 'Naslednji izdelek'], ['#nav-right', 'title', 'Naslednji izdelek'],
    ['#btn-cart', 'aria-label', 'Košarica'], ['#brand', 'aria-label', 'Podjetja'], ['#tabs', 'aria-label', 'Podjetja'], ['#btn-lang', 'aria-label', 'Spremeni jezik']]
     .forEach(([q, a, v]) => { const e = $(q); if (e) e.setAttribute(a, t(v)); });
   $$('#btn-lang span').forEach(e => e.classList.toggle('on', e.dataset.l === LANG));
@@ -648,15 +648,15 @@ async function init() {
   $('#btn-admin').onclick = openAdmin;
   $('#tabs').addEventListener('click', e => { const b = e.target.closest('[data-ch]'); if (b) FA.setChannel(b.dataset.ch); setFilterMenu(false); });
   $('#nav-up').onclick = () => step(-1); $('#nav-down').onclick = () => step(1);
-  $('#nav-left').onclick = () => swipeChannel(-1); $('#nav-right').onclick = () => swipeChannel(1);
+  $('#nav-left').onclick = () => step(-1); $('#nav-right').onclick = () => step(1);
   bindFeed();
 
   document.addEventListener('keydown', e => {
     if (e.target.matches('input,textarea,select') || $('#sheet-root').classList.contains('open') || FA.admin.active) { if (e.key === 'Escape') FA.closeSheet(); return; }
     if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); step(1); }
     else if (e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); step(-1); }
-    else if (e.key === 'ArrowRight') swipeChannel(1);
-    else if (e.key === 'ArrowLeft') swipeChannel(-1);
+    else if (e.key === 'ArrowRight') step(1);
+    else if (e.key === 'ArrowLeft') step(-1);
   });
 
   await loadData();
