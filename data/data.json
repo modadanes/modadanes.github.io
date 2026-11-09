@@ -107,7 +107,7 @@
       "descriptionEn": "",
       "title": "kozmetika izdelek 1",
       "sku": "",
-      "price": "",
+      "price": 23,
       "oldPrice": "",
       "description": "",
       "model": "",
@@ -315,5 +315,5 @@
     }
   ],
   "sections": [],
-  "updatedAt": "2026-11-09T20:02:05.592Z"
+  "updatedAt": "2026-11-09T20:02:17.777Z"
 }
