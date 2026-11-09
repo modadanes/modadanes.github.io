@@ -215,6 +215,23 @@ FA.renderFilters = () => {
   an.innerHTML = !secHasAges(FA.section) ? '' : chip('data-age', 'all', 'Vse starosti', FA.age === 'all') + TAX.ages.map(x => chip('data-age', x.id, x.name, FA.age === x.id)).join('');
 };
 
+/* ---------- glavni meni filtrov ---------- */
+function setFilterMenu(open) {
+  const menu = $('#filter-menu'), btn = $('#btn-menu');
+  if (!menu || !btn) return;
+  menu.hidden = !open;
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  btn.classList.toggle('on', open);
+  const caret = $('.menu-caret', btn);
+  if (caret) caret.textContent = open ? '⌃' : '⌄';
+}
+
+function bindFilterMenu() {
+  const btn = $('#btn-menu');
+  if (!btn) return;
+  btn.addEventListener('click', () => setFilterMenu($('#filter-menu').hidden));
+}
+
 /* ---------- feed ---------- */
 let loadIO, activeIO, cmap = new Map();
 
@@ -590,6 +607,8 @@ FA.renderAll = () => {
   const nm = L(s, 'siteName') || 'Moda danes';
   $('#site-name').textContent = nm;
   document.title = nm;
+  bindFilterMenu();
+  setFilterMenu(false);
   FA.renderFilters(); FA.renderTabs(); FA.renderFeed(); updateBadge();
 };
 function applyStatic() {
@@ -630,12 +649,12 @@ async function init() {
   $('#ic-admin').innerHTML = ic.user;
   $('#brand').onclick = openBrands;
   $('#btn-lang').onclick = () => setLang(LANG === 'sl' ? 'en' : 'sl');
-  $('#sections').addEventListener('click', e => { const b = e.target.closest('[data-sec]'); if (!b) return; FA.section = b.dataset.sec; FA.age = 'all'; FA.renderFilters(); FA.renderTabs(); FA.renderFeed(); });
+  $('#sections').addEventListener('click', e => { const b = e.target.closest('[data-sec]'); if (!b) return; FA.section = b.dataset.sec; FA.age = 'all'; FA.renderFilters(); FA.renderTabs(); FA.renderFeed(); setFilterMenu(false); });
   $('#ages').addEventListener('click', e => { const b = e.target.closest('[data-age]'); if (!b) return; FA.age = b.dataset.age; FA.renderFilters(); FA.renderTabs(); FA.renderFeed(); });
   applyStatic();
   $('#btn-cart').onclick = () => FA.openCart();
   $('#btn-admin').onclick = openAdmin;
-  $('#tabs').addEventListener('click', e => { const b = e.target.closest('[data-ch]'); if (b) FA.setChannel(b.dataset.ch); });
+  $('#tabs').addEventListener('click', e => { const b = e.target.closest('[data-ch]'); if (b) FA.setChannel(b.dataset.ch); setFilterMenu(false); });
   $('#nav-up').onclick = () => step(-1); $('#nav-down').onclick = () => step(1);
   $('#nav-left').onclick = () => swipeChannel(-1); $('#nav-right').onclick = () => swipeChannel(1);
   bindFeed();

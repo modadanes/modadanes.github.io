@@ -30,9 +30,12 @@
         <button id="btn-admin" class="icon-btn" aria-label="Admin"><span id="ic-admin"></span><i id="admin-dot" class="dot" hidden></i></button>
       </div>
     </div>
-    <nav id="tabs" class="tabs" aria-label="Podjetja"></nav>
-    <nav id="sections" class="tabs sub" hidden></nav>
-    <nav id="ages" class="tabs sub" hidden></nav>
+    <button id="btn-menu" class="menu-btn" type="button" aria-expanded="false" aria-controls="filter-menu">Meni <span class="menu-caret">⌄</span></button>
+    <div id="filter-menu" class="filter-menu" hidden>
+      <nav id="tabs" class="tabs" aria-label="Podjetja"></nav>
+      <nav id="sections" class="tabs sub" hidden></nav>
+      <nav id="ages" class="tabs sub" hidden></nav>
+    </div>
   </header>
 
   <main id="feed" tabindex="-1"></main>
