@@ -48,6 +48,31 @@
   ],
   "items": [
     {
+      "id": "lmw9oxbbm5ezd",
+      "type": "image",
+      "companyId": "podjetje-nakit-1-s6f3",
+      "section": "clothes",
+      "ages": [],
+      "titleEn": "",
+      "descriptionEn": "",
+      "title": "nakit 2",
+      "sku": "",
+      "price": 56,
+      "oldPrice": "",
+      "description": "",
+      "model": "",
+      "category": "",
+      "sizes": [],
+      "imageUrl": "https://i.imgur.com/IuyorQr.jpeg",
+      "videoUrl": "",
+      "vertical": true,
+      "focusY": 50,
+      "fit": "cover",
+      "inStock": true,
+      "active": true,
+      "createdAt": 1794254705554
+    },
+    {
       "id": "lmw9owh76b9md",
       "type": "image",
       "companyId": "podjetje-nakit-1-s6f3",
@@ -365,5 +390,5 @@
     }
   ],
   "sections": [],
-  "updatedAt": "2026-11-09T20:04:42.869Z"
+  "updatedAt": "2026-11-09T20:05:19.848Z"
 }
