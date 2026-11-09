@@ -13,17 +13,6 @@
   },
   "companies": [
     {
-      "id": "podjetje-nakit-1-s6f3",
-      "name": "nakitfirma",
-      "logo": "",
-      "description": "",
-      "website": "",
-      "instagram": "",
-      "active": true,
-      "createdAt": 1794252268775,
-      "descriptionEn": ""
-    },
-    {
       "id": "demo-atelier-0001",
       "name": "Atelier",
       "logo": "",
@@ -33,6 +22,17 @@
       "active": true,
       "createdAt": 1762650000000,
       "descriptionEn": "Sample company. Delete it in Admin and add your real companies."
+    },
+    {
+      "id": "podjetje-nakit-1-s6f3",
+      "name": "nakitfirma",
+      "logo": "",
+      "description": "",
+      "website": "",
+      "instagram": "",
+      "active": true,
+      "createdAt": 1794252268775,
+      "descriptionEn": ""
     },
     {
       "id": "podjetje-kozmetika-1-qg0n",
@@ -540,5 +540,5 @@
     }
   ],
   "sections": [],
-  "updatedAt": "2026-11-09T20:28:39.324Z"
+  "updatedAt": "2026-11-09T20:28:42.406Z"
 }
