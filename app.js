@@ -183,7 +183,15 @@ function visibleItems() {
   let it = FA.data.items.filter(i => i.active !== false && act.has(i.companyId) && secOk(i) && ageOk(i));
   if (FA.channel === 'fav') it = it.filter(i => FA.favs.has(i.id));
   else if (FA.channel !== 'all') it = it.filter(i => i.companyId === FA.channel);
-  return it;
+
+  // Na začetnem zaslonu prikaži vse izdelke podjetij v vrstnem redu,
+  // ki ga je uporabnik določil z vlečenjem v Adminu. Znotraj podjetja
+  // ostane vrstni red izdelkov nespremenjen.
+  const companyPosition = new Map(FA.data.companies.map((company, index) => [company.id, index]));
+  return it.map((item, index) => ({ item, index }))
+    .sort((a, b) => (companyPosition.get(a.item.companyId) ?? Number.MAX_SAFE_INTEGER)
+      - (companyPosition.get(b.item.companyId) ?? Number.MAX_SAFE_INTEGER) || a.index - b.index)
+    .map(entry => entry.item);
 }
 function channels() {
   const act = activeCompanyIds();
