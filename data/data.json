@@ -75,7 +75,7 @@
         "L",
         "XL"
       ],
-      "imageUrl": "demo/look2.svg",
+      "imageUrl": "https://i.imgur.com/vH6YeiN.jpeg",
       "videoUrl": "",
       "vertical": true,
       "focusY": 50,
@@ -118,5 +118,5 @@
     }
   ],
   "sections": [],
-  "updatedAt": "2026-11-09T17:24:26.261Z"
+  "updatedAt": "2026-11-09T17:26:10.969Z"
 }
