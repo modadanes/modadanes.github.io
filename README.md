@@ -1,4 +1,4 @@
-# Modna pista (PWA za telefon in računalnik)
+# Moda danes (PWA za telefon in računalnik)
 
 Pokončni (9:16) feed z modelkami: **swipe gor/dol** = naslednji look, **swipe levo/desno** = druga znamka. Neomejeno podjetij, košarica, naročilo po e-pošti, admin.
 

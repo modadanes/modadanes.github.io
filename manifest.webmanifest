@@ -1,7 +1,7 @@
 {
-  "name": "Modna pista – modna revija",
-  "short_name": "Modna pista",
-  "description": "Modna pista: oblačila, kozmetika in nakit v žepu",
+  "name": "Moda danes – modna revija",
+  "short_name": "Moda danes",
+  "description": "Moda danes: oblačila, kozmetika in nakit v žepu",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

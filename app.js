@@ -74,7 +74,7 @@ const ic = {
 };
 
 /* ---------- stanje ---------- */
-const DEF = { siteName: 'Modna pista', tagline: 'Modna revija v žepu', taglineEn: '', orderEmail: '', currency: 'EUR', showPrices: true, ordersEnabled: true, orderNote: '', orderNoteEn: '' };
+const DEF = { siteName: 'Moda danes', siteNameEn: 'Fashion Today', tagline: 'Modna revija v žepu', taglineEn: '', orderEmail: '', currency: 'EUR', showPrices: true, ordersEnabled: true, orderNote: '', orderNoteEn: '' };
 const FA = window.FA = {
   data: { settings: { ...DEF }, companies: [], items: [] },
   channel: 'all', section: 'all', age: 'all', t, L, TAX, secOf,
@@ -93,7 +93,7 @@ FA.secHasAges = secHasAges;
 FA.setData = j => {
   j = j && typeof j === 'object' ? j : {};
   FA.data = {
-    settings: (() => { const x = { ...DEF, ...(j.settings || {}) }; if (!x.siteName || x.siteName === 'Runway') x.siteName = 'Modna pista'; return x; })(),
+    settings: (() => { const x = { ...DEF, ...(j.settings || {}) }; if (!x.siteName || x.siteName === 'Runway' || x.siteName === 'Modna pista') x.siteName = 'Moda danes'; return x; })(),
     companies: Array.isArray(j.companies) ? j.companies : [],
     items: Array.isArray(j.items) ? j.items : [],
     sections: Array.isArray(j.sections) ? j.sections : [],
@@ -419,7 +419,7 @@ function openBrands() {
   const cos = FA.data.companies.filter(c => counts[c.id]);
   const row = (id, name, logo, sub) => `<button class="brand-row" data-ch="${esc(id)}"><span class="avatar" ${logo ? `style="background-image:url('${esc(logo)}')"` : ''}>${logo ? '' : esc(name.charAt(0).toUpperCase())}</span><span><b>${esc(name)}</b><small>${esc(sub)}</small></span></button>`;
   FA.openSheet({
-    title: FA.data.settings.siteName || t('Znamke'),
+    title: L(FA.data.settings, 'siteName') || t('Znamke'),
     html: (L(FA.data.settings, 'tagline') ? `<p class="mut" style="margin:0 0 8px">${esc(L(FA.data.settings, 'tagline'))}</p>` : '') +
       row('all', t('Vse znamke'), '', plural(FA.data.items.filter(i => i.active !== false && act.has(i.companyId)).length)) +
       cos.map(c => row(c.id, c.name, safeUrl(c.logo), plural(counts[c.id]))).join(''),
@@ -569,7 +569,7 @@ async function sendOrder(v, no) {
     _template: 'table',
     _captcha: 'false',
     _replyto: v.email,
-    _autoresponse: LANG === 'en' ? `Thank you for your order ${no}! We have received it and will contact you shortly. – ${s.siteName}` : `Hvala za naročilo ${no}! Prejeli smo ga in se vam bomo oglasili v najkrajšem možnem času. – ${s.siteName}`,
+    _autoresponse: LANG === 'en' ? `Thank you for your order ${no}! We have received it and will contact you shortly. – ${L(s, 'siteName')}` : `Hvala za naročilo ${no}! Prejeli smo ga in se vam bomo oglasili v najkrajšem možnem času. – ${s.siteName}`,
     'Št. naročila': no,
     'Ime in priimek': v.name,
     'E-pošta': v.email,
@@ -587,8 +587,9 @@ async function sendOrder(v, no) {
 /* ---------- skupno ---------- */
 FA.renderAll = () => {
   const s = FA.data.settings;
-  $('#site-name').textContent = s.siteName || 'Modna pista';
-  document.title = s.siteName || 'Modna pista';
+  const nm = L(s, 'siteName') || 'Moda danes';
+  $('#site-name').textContent = nm;
+  document.title = nm;
   FA.renderFilters(); FA.renderTabs(); FA.renderFeed(); updateBadge();
 };
 function applyStatic() {
@@ -619,7 +620,7 @@ function openLook(id) {
 
 async function openAdmin() {
   if (!window.FA.openAdmin) {
-    await new Promise((res, rej) => { const s = document.createElement('script'); s.src = 'admin.js?v=3'; s.onload = res; s.onerror = () => rej(new Error('admin.js se ni naložil')); document.head.appendChild(s); }).catch(e => FA.toast(e.message));
+    await new Promise((res, rej) => { const s = document.createElement('script'); s.src = 'admin.js?v=4'; s.onload = res; s.onerror = () => rej(new Error('admin.js se ni naložil')); document.head.appendChild(s); }).catch(e => FA.toast(e.message));
   }
   if (FA.openAdmin) FA.openAdmin();
 }

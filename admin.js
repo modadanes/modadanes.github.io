@@ -1,4 +1,4 @@
-/* Modna pista – admin (prijava, urejanje, objava na GitHub, nalaganje slik) */
+/* Moda danes – admin (prijava, urejanje, objava na GitHub, nalaganje slik) */
 (() => {
 'use strict';
 const FA = window.FA;
@@ -526,7 +526,8 @@ function viewSettings() {
   view().innerHTML = `
   <div class="a-sec"><h3>Aplikacija in naročila</h3>
     <form class="form" id="f-set" autocomplete="off">
-      <div class="two"><label>Ime aplikacije<input name="siteName" value="${esc(s.siteName)}"></label><label>Valuta<select name="currency">${['EUR', 'USD', 'GBP', 'CHF', 'PLN', 'CZK', 'HUF', 'RON', 'SEK', 'NOK', 'DKK'].map(x => `<option ${x === s.currency ? 'selected' : ''}>${x}</option>`).join('')}</select></label></div>
+      <div class="two"><label>Ime aplikacije<input name="siteName" value="${esc(s.siteName)}"></label><label>Ime v angleščini<input name="siteNameEn" value="${esc(s.siteNameEn || '')}"></label></div>
+      <div class="two"><label>Valuta<select name="currency">${['EUR', 'USD', 'GBP', 'CHF', 'PLN', 'CZK', 'HUF', 'RON', 'SEK', 'NOK', 'DKK'].map(x => `<option ${x === s.currency ? 'selected' : ''}>${x}</option>`).join('')}</select></label></div>
       <label>Podnaslov (v seznamu znamk)<input name="tagline" value="${esc(s.tagline)}"></label>
       <label>Podnaslov v angleščini<input name="taglineEn" value="${esc(s.taglineEn || '')}"></label>
       <label>Tvoj e-naslov za naročila *<input name="orderEmail" type="email" placeholder="ime@domena.si" value="${esc(s.orderEmail)}"></label>
@@ -557,7 +558,7 @@ function viewSettings() {
     e.preventDefault(); const f = e.target.elements; const er = $('#er', v);
     const mail = f.orderEmail.value.trim();
     if (mail && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(mail)) { er.textContent = 'Neveljaven e-naslov.'; return; }
-    Object.assign(FA.data.settings, { siteName: f.siteName.value.trim() || 'Modna pista', currency: f.currency.value, tagline: f.tagline.value.trim(), taglineEn: f.taglineEn.value.trim(), orderNoteEn: f.orderNoteEn.value.trim(), orderEmail: mail, orderNote: f.orderNote.value.trim(), ordersEnabled: f.ordersEnabled.checked, showPrices: f.showPrices.checked });
+    Object.assign(FA.data.settings, { siteName: f.siteName.value.trim() || 'Moda danes', siteNameEn: f.siteNameEn.value.trim(), currency: f.currency.value, tagline: f.tagline.value.trim(), taglineEn: f.taglineEn.value.trim(), orderNoteEn: f.orderNoteEn.value.trim(), orderEmail: mail, orderNote: f.orderNote.value.trim(), ordersEnabled: f.ordersEnabled.checked, showPrices: f.showPrices.checked });
     er.textContent = ''; queuePublish(); FA.toast('Shranjeno');
   };
   $('#test', v).onclick = async () => {

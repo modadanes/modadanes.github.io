@@ -1,5 +1,5 @@
-/* Modna pista – service worker: najprej omrežje, ob izpadu predpomnilnik */
-const V = 'modna-pista-v3';
+/* Moda danes – service worker: najprej omrežje, ob izpadu predpomnilnik */
+const V = 'moda-danes-v4';
 const SHELL = ['./', 'index.html', 'style.css', 'app.js', 'admin.js', 'manifest.webmanifest', 'icon.svg'];
 
 self.addEventListener('install', e => {
