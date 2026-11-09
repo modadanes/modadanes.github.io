@@ -48,6 +48,31 @@
   ],
   "items": [
     {
+      "id": "lmw9orqyroxnq",
+      "type": "image",
+      "companyId": "podjetje-kozmetika-1-qg0n",
+      "section": "clothes",
+      "ages": [],
+      "titleEn": "",
+      "descriptionEn": "",
+      "title": "kozmetika izdelek 2",
+      "sku": "",
+      "price": "",
+      "oldPrice": "",
+      "description": "",
+      "model": "",
+      "category": "",
+      "sizes": [],
+      "imageUrl": "https://i.imgur.com/HEhnTgI.jpeg",
+      "videoUrl": "",
+      "vertical": true,
+      "focusY": 50,
+      "fit": "cover",
+      "inStock": true,
+      "active": true,
+      "createdAt": 1794254445891
+    },
+    {
       "id": "lmw9opov2g4qd",
       "type": "image",
       "companyId": "podjetje-kozmetika-1-qg0n",
@@ -265,5 +290,5 @@
     }
   ],
   "sections": [],
-  "updatedAt": "2026-11-09T19:59:34.421Z"
+  "updatedAt": "2026-11-09T20:00:58.872Z"
 }
