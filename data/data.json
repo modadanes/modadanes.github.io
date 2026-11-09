@@ -14,7 +14,7 @@
   "companies": [
     {
       "id": "demo-atelier-0001",
-      "name": "Demo Atelier",
+      "name": "Atelier",
       "logo": "",
       "description": "Primer podjetja. Izbriši ga v Adminu in dodaj prava podjetja.",
       "website": "",
@@ -540,5 +540,5 @@
     }
   ],
   "sections": [],
-  "updatedAt": "2026-11-09T20:10:15.780Z"
+  "updatedAt": "2026-11-09T20:14:22.851Z"
 }
