@@ -128,7 +128,7 @@
       "model": "Luka",
       "category": "Kompleti",
       "sizes": [],
-      "imageUrl": "demo/look3.svg",
+      "imageUrl": "https://i.imgur.com/VG4mKZh.jpeg",
       "videoUrl": "",
       "vertical": true,
       "focusY": 50,
@@ -143,5 +143,5 @@
     }
   ],
   "sections": [],
-  "updatedAt": "2026-11-09T17:28:08.596Z"
+  "updatedAt": "2026-11-09T17:29:47.317Z"
 }
