@@ -33,6 +33,17 @@
       "active": true,
       "createdAt": 1794252201463,
       "descriptionEn": ""
+    },
+    {
+      "id": "podjetje-nakit-1-s6f3",
+      "name": "podjetje nakit 1",
+      "logo": "",
+      "description": "",
+      "website": "",
+      "instagram": "",
+      "active": true,
+      "createdAt": 1794252268775,
+      "descriptionEn": ""
     }
   ],
   "items": [
@@ -229,5 +240,5 @@
     }
   ],
   "sections": [],
-  "updatedAt": "2026-11-09T19:24:23.425Z"
+  "updatedAt": "2026-11-09T19:24:51.911Z"
 }
