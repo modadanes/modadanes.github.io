@@ -1,6 +1,6 @@
 {
   "settings": {
-    "siteName": "Modna pista",
+    "siteName": "Moda danes",
     "tagline": "Modna revija v žepu",
     "orderEmail": "",
     "currency": "EUR",
@@ -8,7 +8,8 @@
     "ordersEnabled": true,
     "orderNote": "",
     "taglineEn": "Fashion show in your pocket",
-    "orderNoteEn": ""
+    "orderNoteEn": "",
+    "siteNameEn": "Fashion Today"
   },
   "companies": [
     {
