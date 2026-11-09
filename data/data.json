@@ -48,6 +48,31 @@
   ],
   "items": [
     {
+      "id": "lmw9ozlya41u8",
+      "type": "image",
+      "companyId": "podjetje-nakit-1-s6f3",
+      "section": "clothes",
+      "ages": [],
+      "titleEn": "",
+      "descriptionEn": "",
+      "title": "nakit 5",
+      "sku": "",
+      "price": 53,
+      "oldPrice": "",
+      "description": "",
+      "model": "",
+      "category": "",
+      "sizes": [],
+      "imageUrl": "https://i.imgur.com/nT1SljY.jpeg",
+      "videoUrl": "",
+      "vertical": true,
+      "focusY": 50,
+      "fit": "cover",
+      "inStock": true,
+      "active": true,
+      "createdAt": 1794254812642
+    },
+    {
       "id": "lmw9oyfrlxy5e",
       "type": "image",
       "companyId": "podjetje-nakit-1-s6f3",
@@ -440,5 +465,5 @@
     }
   ],
   "sections": [],
-  "updatedAt": "2026-11-09T20:06:29.121Z"
+  "updatedAt": "2026-11-09T20:07:08.342Z"
 }
