@@ -367,36 +367,12 @@ function bindFeed() {
     }
   });
 
-  // vodoravni swipe = zamenjava znamke
-  let sx = 0, sy = 0, dx = 0, lock = null, tracking = false;
-  feed.addEventListener('touchstart', e => {
-    if (e.touches.length !== 1) { tracking = false; return; }
-    tracking = true; sx = e.touches[0].clientX; sy = e.touches[0].clientY; dx = 0; lock = null;
-  }, { passive: true });
+  // Vodoravni swipe je namenoma onemogočen. Feed se premika samo gor/dol.
+  // Zamenjava znamke je še vedno možna prek gumbov in tipk s puščicami.
   feed.addEventListener('touchmove', e => {
-    if (!tracking) return;
-    const t = e.touches[0]; dx = t.clientX - sx; const dy = t.clientY - sy;
-    if (lock === null && (Math.abs(dx) > 12 || Math.abs(dy) > 12)) lock = Math.abs(dx) > Math.abs(dy) * 1.3 ? 'h' : 'v';
-    if (lock === 'h') { feed.style.transform = `translateX(${dx * 0.55}px)`; feed.style.opacity = String(1 - Math.min(0.5, Math.abs(dx) / 500)); }
-  }, { passive: true });
-  const end = () => {
-    if (!tracking) return; tracking = false;
-    const was = lock === 'h'; const d = dx;
-    if (was) { feed.style.transform = ''; feed.style.opacity = ''; }
-    lock = null;
-    if (was && Math.abs(d) > 70) swipeChannel(d < 0 ? 1 : -1, d * 0.55);
-    else if (was) feed.animate([{ transform: `translateX(${d * 0.55}px)` }, { transform: 'translateX(0)' }], { duration: 180 });
-  };
-  feed.addEventListener('touchend', end);
-  feed.addEventListener('touchcancel', end);
-
-  // drsenje s sledilno ploščico (vodoravno)
-  let wlock = 0;
-  feed.addEventListener('wheel', e => {
-    if (Math.abs(e.deltaX) > Math.abs(e.deltaY) && Math.abs(e.deltaX) > 40 && Date.now() > wlock) {
-      wlock = Date.now() + 700; e.preventDefault(); swipeChannel(e.deltaX > 0 ? 1 : -1);
-    }
+    if (e.touches.length > 1) e.preventDefault();
   }, { passive: false });
+
 }
 
 async function swipeChannel(step, from = 0) {
