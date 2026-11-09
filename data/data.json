@@ -22,6 +22,17 @@
       "active": true,
       "createdAt": 1762650000000,
       "descriptionEn": "Sample company. Delete it in Admin and add your real companies."
+    },
+    {
+      "id": "podjetje-kozmetika-1-qg0n",
+      "name": "podjetje kozmetika 1",
+      "logo": "",
+      "description": "",
+      "website": "",
+      "instagram": "",
+      "active": true,
+      "createdAt": 1794252201463,
+      "descriptionEn": ""
     }
   ],
   "items": [
@@ -218,5 +229,5 @@
     }
   ],
   "sections": [],
-  "updatedAt": "2026-11-09T18:23:47.639Z"
+  "updatedAt": "2026-11-09T19:24:23.425Z"
 }
