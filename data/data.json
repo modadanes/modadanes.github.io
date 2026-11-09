@@ -26,6 +26,31 @@
   ],
   "items": [
     {
+      "id": "lmw9jb5by73oj",
+      "type": "image",
+      "companyId": "demo-atelier-0001",
+      "section": "clothes",
+      "ages": [],
+      "titleEn": "",
+      "descriptionEn": "",
+      "title": "obleka 2",
+      "sku": "",
+      "price": "",
+      "oldPrice": "",
+      "description": "",
+      "model": "",
+      "category": "",
+      "sizes": [],
+      "imageUrl": "https://i.imgur.com/VN6E2V3.jpeg",
+      "videoUrl": "",
+      "vertical": true,
+      "focusY": 50,
+      "fit": "cover",
+      "inStock": true,
+      "active": true,
+      "createdAt": 1794245273278
+    },
+    {
       "id": "demo-look-1",
       "type": "image",
       "companyId": "demo-atelier-0001",
@@ -118,5 +143,5 @@
     }
   ],
   "sections": [],
-  "updatedAt": "2026-11-09T17:26:10.969Z"
+  "updatedAt": "2026-11-09T17:28:08.596Z"
 }
