@@ -48,6 +48,31 @@
   ],
   "items": [
     {
+      "id": "lmw9p1voxc367",
+      "type": "image",
+      "companyId": "podjetje-nakit-1-s6f3",
+      "section": "clothes",
+      "ages": [],
+      "titleEn": "",
+      "descriptionEn": "",
+      "title": "nakit 9",
+      "sku": "",
+      "price": 43,
+      "oldPrice": "",
+      "description": "",
+      "model": "",
+      "category": "",
+      "sizes": [],
+      "imageUrl": "https://i.imgur.com/p1i0pyS.jpeg",
+      "videoUrl": "",
+      "vertical": true,
+      "focusY": 50,
+      "fit": "cover",
+      "inStock": true,
+      "active": true,
+      "createdAt": 1794254918577
+    },
+    {
       "id": "lmw9p0kg18mz5",
       "type": "image",
       "companyId": "podjetje-nakit-1-s6f3",
@@ -490,5 +515,5 @@
     }
   ],
   "sections": [],
-  "updatedAt": "2026-11-09T20:07:56.737Z"
+  "updatedAt": "2026-11-09T20:08:55.343Z"
 }
