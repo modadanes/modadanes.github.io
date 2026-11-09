@@ -24,17 +24,6 @@
       "descriptionEn": "Sample company. Delete it in Admin and add your real companies."
     },
     {
-      "id": "podjetje-kozmetika-1-qg0n",
-      "name": "Cosmetik",
-      "logo": "",
-      "description": "",
-      "website": "",
-      "instagram": "",
-      "active": true,
-      "createdAt": 1794252201463,
-      "descriptionEn": ""
-    },
-    {
       "id": "podjetje-nakit-1-s6f3",
       "name": "nakitfirma",
       "logo": "",
@@ -43,6 +32,17 @@
       "instagram": "",
       "active": true,
       "createdAt": 1794252268775,
+      "descriptionEn": ""
+    },
+    {
+      "id": "podjetje-kozmetika-1-qg0n",
+      "name": "Cosmetik",
+      "logo": "",
+      "description": "",
+      "website": "",
+      "instagram": "",
+      "active": true,
+      "createdAt": 1794252201463,
       "descriptionEn": ""
     }
   ],
@@ -540,5 +540,5 @@
     }
   ],
   "sections": [],
-  "updatedAt": "2026-11-09T20:14:54.530Z"
+  "updatedAt": "2026-11-09T20:28:33.636Z"
 }
