@@ -405,6 +405,51 @@ FA.setChannel = id => { FA.channel = id; FA.renderFilters(); FA.renderTabs(); FA
 
 function step(dir) { const f = $('#feed'); f.scrollBy({ top: dir * f.clientHeight, behavior: 'smooth' }); }
 
+// Namenski vodoravni prehod za namenska gumba ob sliki (← / →).
+// Sama vsebina se še vedno premakne za eno sliko; animacija pa je vodoravna.
+let horizontalStepBusy = false;
+async function stepHorizontal(dir) {
+  if (horizontalStepBusy) return;
+  const f = $('#feed');
+  const count = f.children.length;
+  if (!count || !f.clientHeight) return;
+  const current = Math.max(0, Math.min(count - 1, Math.round(f.scrollTop / f.clientHeight)));
+  const target = Math.max(0, Math.min(count - 1, current + dir));
+  if (target === current) {
+    f.animate([
+      { transform: 'translateX(0)' },
+      { transform: `translateX(${dir < 0 ? 12 : -12}px)` },
+      { transform: 'translateX(0)' }
+    ], { duration: 180, easing: 'ease-out' });
+    return;
+  }
+  horizontalStepBusy = true;
+  const outX = dir > 0 ? '-100%' : '100%';
+  const inX = dir > 0 ? '100%' : '-100%';
+  try {
+    await f.animate(
+      [{ transform: 'translateX(0)', opacity: 1 }, { transform: `translateX(${outX})`, opacity: 0 }],
+      { duration: 180, easing: 'ease-in' }
+    ).finished;
+    f.style.scrollBehavior = 'auto';
+    f.scrollTop = target * f.clientHeight;
+    f.style.transform = `translateX(${inX})`;
+    f.style.opacity = '0';
+    await f.animate(
+      [{ transform: `translateX(${inX})`, opacity: 0 }, { transform: 'translateX(0)', opacity: 1 }],
+      { duration: 220, easing: 'ease-out' }
+    ).finished;
+    f.style.transform = '';
+    f.style.opacity = '';
+    f.style.scrollBehavior = '';
+  } finally {
+    f.style.transform = '';
+    f.style.opacity = '';
+    f.style.scrollBehavior = '';
+    horizontalStepBusy = false;
+  }
+}
+
 /* ---------- priljubljeno, deljenje, znamka ---------- */
 function toggleFav(id, el) {
   if (FA.favs.has(id)) FA.favs.delete(id); else FA.favs.add(id);
@@ -648,15 +693,15 @@ async function init() {
   $('#btn-admin').onclick = openAdmin;
   $('#tabs').addEventListener('click', e => { const b = e.target.closest('[data-ch]'); if (b) FA.setChannel(b.dataset.ch); setFilterMenu(false); });
   $('#nav-up').onclick = () => step(-1); $('#nav-down').onclick = () => step(1);
-  $('#nav-left').onclick = () => step(-1); $('#nav-right').onclick = () => step(1);
+  $('#nav-left').onclick = () => stepHorizontal(-1); $('#nav-right').onclick = () => stepHorizontal(1);
   bindFeed();
 
   document.addEventListener('keydown', e => {
     if (e.target.matches('input,textarea,select') || $('#sheet-root').classList.contains('open') || FA.admin.active) { if (e.key === 'Escape') FA.closeSheet(); return; }
     if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); step(1); }
     else if (e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); step(-1); }
-    else if (e.key === 'ArrowRight') step(1);
-    else if (e.key === 'ArrowLeft') step(-1);
+    else if (e.key === 'ArrowRight') stepHorizontal(1);
+    else if (e.key === 'ArrowLeft') stepHorizontal(-1);
   });
 
   await loadData();
