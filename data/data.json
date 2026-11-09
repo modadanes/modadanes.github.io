@@ -26,6 +26,31 @@
   ],
   "items": [
     {
+      "id": "lmw9k3boaf0fn",
+      "type": "image",
+      "companyId": "demo-atelier-0001",
+      "section": "clothes",
+      "ages": [],
+      "titleEn": "",
+      "descriptionEn": "",
+      "title": "https://i.imgur.com/W4nwce1.jpeg",
+      "sku": "",
+      "price": "",
+      "oldPrice": "",
+      "description": "",
+      "model": "",
+      "category": "",
+      "sizes": [],
+      "imageUrl": "",
+      "videoUrl": "",
+      "vertical": true,
+      "focusY": 50,
+      "fit": "cover",
+      "inStock": true,
+      "active": true,
+      "createdAt": 1794246587866
+    },
+    {
       "id": "lmw9jb5by73oj",
       "type": "image",
       "companyId": "demo-atelier-0001",
@@ -143,5 +168,5 @@
     }
   ],
   "sections": [],
-  "updatedAt": "2026-11-09T17:29:47.317Z"
+  "updatedAt": "2026-11-09T17:50:02.314Z"
 }
