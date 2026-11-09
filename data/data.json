@@ -1,15 +1,15 @@
 {
   "settings": {
     "siteName": "Moda danes",
+    "siteNameEn": "Fashion Today",
     "tagline": "Modna revija v žepu",
+    "taglineEn": "Fashion show in your pocket",
     "orderEmail": "",
     "currency": "EUR",
     "showPrices": true,
     "ordersEnabled": true,
     "orderNote": "",
-    "taglineEn": "Fashion show in your pocket",
-    "orderNoteEn": "",
-    "siteNameEn": "Fashion Today"
+    "orderNoteEn": ""
   },
   "companies": [
     {
@@ -42,7 +42,7 @@
         "M",
         "L"
       ],
-      "imageUrl": "demo/look1.svg",
+      "imageUrl": "https://i.imgur.com/z5wo45o.jpeg",
       "videoUrl": "",
       "vertical": true,
       "focusY": 50,
@@ -117,5 +117,6 @@
       "descriptionEn": "Sample description: two-piece set in earthy tones."
     }
   ],
-  "updatedAt": "2026-11-09T12:00:00.000Z"
+  "sections": [],
+  "updatedAt": "2026-11-09T17:24:26.261Z"
 }
