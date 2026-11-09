@@ -242,3 +242,11 @@ a{color:var(--acc)}
 .lang-btn{height:40px;padding:0 11px;border-radius:999px;font-size:12px;font-weight:600;letter-spacing:.05em;color:rgba(255,255,255,.5);background:rgba(20,20,22,.4);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.15)}
 .lang-btn span.on{color:#fff}
 .age-chips{display:flex;flex-wrap:wrap;gap:8px}
+
+/* Razvrščanje podjetij v adminu */
+.company-order-row { transition: opacity .15s, border-color .15s, transform .15s; }
+.company-order-row[draggable="true"] { cursor: grab; }
+.company-order-row.dragging { opacity: .4; }
+.company-order-row.drag-over { border-color: var(--acc); transform: translateY(-2px); }
+.drag-handle { display:flex; align-items:center; justify-content:center; flex:none; width:30px; min-height:42px; color:var(--mut); font-size:25px; cursor:grab; touch-action:none; user-select:none; }
+.drag-handle:active { cursor:grabbing; color:var(--acc); }

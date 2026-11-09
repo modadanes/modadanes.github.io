@@ -418,9 +418,44 @@ function bulkForm() {
 /* ----- PODJETJA ----- */
 function viewCompanies() {
   const D = FA.data;
-  view().innerHTML = `<div class="a-bar"><button class="btn primary" id="n-co">${ic.plus} Novo podjetje</button><span class="mut" style="font-size:13px">${D.companies.length} podjetij · brez omejitve</span></div>
-    <div class="a-list">${D.companies.map(c => { const n = D.items.filter(i => i.companyId === c.id).length; const lg = safeUrl(c.logo); return `<div class="row ${c.active === false ? 'off' : ''}"><span class="avatar" ${lg ? `style="background-image:url('${esc(lg)}')"` : ''}>${lg ? '' : esc(c.name.charAt(0).toUpperCase())}</span><div class="grow"><b>${esc(c.name)}</b><small>${n} izdelkov${c.active === false ? ' · skrito' : ''}</small></div><button class="btn" data-c="edit" data-id="${esc(c.id)}">${ic.edit}</button><button class="btn" data-c="hide" data-id="${esc(c.id)}">${c.active === false ? ic.eye : ic.eyeOff}</button><button class="btn danger" data-c="del" data-id="${esc(c.id)}">${ic.trash}</button></div>`; }).join('') || '<div class="empty-s">Še ni podjetij.</div>'}</div>`;
+  view().innerHTML = `<div class="a-bar"><button class="btn primary" id="n-co">${ic.plus} Novo podjetje</button><span class="mut" style="font-size:13px">${D.companies.length} podjetij · povleci za vrstni red</span></div>
+    <div class="a-list" id="company-order-list">${D.companies.map((c, i) => { const n = D.items.filter(i => i.companyId === c.id).length; const lg = safeUrl(c.logo); return `<div class="row company-order-row ${c.active === false ? 'off' : ''}" data-company-row="${esc(c.id)}" draggable="true"><span class="drag-handle" role="button" tabindex="0" aria-label="Premakni podjetje" title="Povleci za spremembo vrstnega reda">⠿</span><span class="avatar" ${lg ? `style="background-image:url('${esc(lg)}')"` : ''}>${lg ? '' : esc(c.name.charAt(0).toUpperCase())}</span><div class="grow"><b>${esc(c.name)}</b><small>${i === 0 ? 'Prvo prikazano' : `${i + 1}. v vrstnem redu`} · ${n} izdelkov${c.active === false ? ' · skrito' : ''}</small></div><button class="btn" data-c="edit" data-id="${esc(c.id)}">${ic.edit}</button><button class="btn" data-c="hide" data-id="${esc(c.id)}">${c.active === false ? ic.eye : ic.eyeOff}</button><button class="btn danger" data-c="del" data-id="${esc(c.id)}">${ic.trash}</button></div>`; }).join('') || '<div class="empty-s">Še ni podjetij.</div>'}</div>`;
   $('#n-co', view()).onclick = () => companyForm();
+  const orderList = $('#company-order-list', view());
+  let draggedId = null;
+  const moveCompany = (fromId, toId) => {
+    if (!fromId || !toId || fromId === toId) return;
+    const from = D.companies.findIndex(x => x.id === fromId), to = D.companies.findIndex(x => x.id === toId);
+    if (from < 0 || to < 0) return;
+    const [moved] = D.companies.splice(from, 1); D.companies.splice(to, 0, moved);
+    queuePublish(); viewCompanies();
+  };
+  orderList.querySelectorAll('[data-company-row]').forEach(row => {
+    row.addEventListener('dragstart', e => { draggedId = row.dataset.companyRow; row.classList.add('dragging'); e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', draggedId); });
+    row.addEventListener('dragover', e => { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; row.classList.add('drag-over'); });
+    row.addEventListener('dragleave', () => row.classList.remove('drag-over'));
+    row.addEventListener('drop', e => { e.preventDefault(); row.classList.remove('drag-over'); moveCompany(draggedId || e.dataTransfer.getData('text/plain'), row.dataset.companyRow); });
+    row.addEventListener('dragend', () => { draggedId = null; orderList.querySelectorAll('.dragging,.drag-over').forEach(x => x.classList.remove('dragging','drag-over')); });
+  });
+  // Pointer dragging also works on touch screens.
+  let pointerDragId = null;
+  orderList.querySelectorAll('.drag-handle').forEach(handle => {
+    handle.addEventListener('pointerdown', e => { pointerDragId = handle.closest('[data-company-row]').dataset.companyRow; handle.setPointerCapture(e.pointerId); e.preventDefault(); });
+    handle.addEventListener('pointermove', e => {
+      if (!pointerDragId) return;
+      const target = document.elementFromPoint(e.clientX, e.clientY)?.closest('[data-company-row]');
+      orderList.querySelectorAll('.drag-over').forEach(x => x.classList.remove('drag-over'));
+      if (target && target.dataset.companyRow !== pointerDragId) target.classList.add('drag-over');
+    });
+    handle.addEventListener('pointerup', e => {
+      if (!pointerDragId) return;
+      const target = document.elementFromPoint(e.clientX, e.clientY)?.closest('[data-company-row]');
+      const from = pointerDragId; pointerDragId = null;
+      if (target) moveCompany(from, target.dataset.companyRow);
+      orderList.querySelectorAll('.drag-over').forEach(x => x.classList.remove('drag-over'));
+    });
+    handle.addEventListener('pointercancel', () => { pointerDragId = null; });
+  });
   $$('[data-c]', view()).forEach(b => b.onclick = () => {
     const c = D.companies.find(x => x.id === b.dataset.id); if (!c) return;
     if (b.dataset.c === 'edit') companyForm(c);
