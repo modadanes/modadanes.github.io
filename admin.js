@@ -388,7 +388,7 @@ function bulkForm() {
     title: 'Več slik naenkrat', cls: 'wide',
     html: `<div class="form"><label>Podjetje<select id="b-co">${D.companies.map(c => `<option value="${esc(c.id)}" ${c.id === A.filter ? 'selected' : ''}>${esc(c.name)}</option>`).join('')}</select></label>
       <label>Rubrika<select id="b-sec">${FA.getSections().map(x => `<option value="${x.id}">${esc(x.name)}</option>`).join('')}</select></label>
-      <div class="note">Vsaka slika postane nov izdelek (kot <b>skrit osnutek</b>). Nato pri vsakem dopolniš naziv, šifro in ceno ter ga vklopiš z gumbom oko.</div>
+      <div class="note">Vsaka slika postane nov izdelek in je takoj vidna v aplikaciji. Nato lahko pri vsakem dopolniš naziv, šifro in ceno.</div>
       <button class="btn" id="b-pick">${ic.upload} Izberi slike</button><input type="file" id="b-file" accept="image/*" multiple hidden>
       <div id="b-list"></div></div>`,
     onMount: s => {
@@ -404,7 +404,7 @@ function bulkForm() {
           try {
             sm.textContent = 'nalagam…';
             const url = await uploadFile(files[i], p => sm.textContent = `nalagam… ${Math.round(p * 100)}%`);
-            FA.data.items.unshift({ id: uid('l'), type: 'image', companyId: co, section: sec, ages: [], title: files[i].name.replace(/\.[^.]+$/, '').replace(/[-_]+/g, ' '), sku: '', price: '', oldPrice: '', description: '', model: '', category: '', sizes: [], imageUrl: url, videoUrl: '', vertical: true, focusY: 50, fit: 'cover', inStock: true, active: false, createdAt: Date.now() });
+            FA.data.items.unshift({ id: uid('l'), type: 'image', companyId: co, section: sec, ages: [], title: files[i].name.replace(/\.[^.]+$/, '').replace(/[-_]+/g, ' '), sku: '', price: '', oldPrice: '', description: '', model: '', category: '', sizes: [], imageUrl: url, videoUrl: '', vertical: true, focusY: 50, fit: 'cover', inStock: true, active: true, createdAt: Date.now() });
             sm.textContent = '✓ naloženo'; ok++;
           } catch (err) { sm.textContent = '✗ ' + err.message; sm.style.color = 'var(--danger)'; }
         }
