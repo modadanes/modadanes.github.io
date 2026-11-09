@@ -48,6 +48,31 @@
   ],
   "items": [
     {
+      "id": "lmw9opov2g4qd",
+      "type": "image",
+      "companyId": "podjetje-kozmetika-1-qg0n",
+      "section": "clothes",
+      "ages": [],
+      "titleEn": "",
+      "descriptionEn": "",
+      "title": "kozmetika izdelek 1",
+      "sku": "",
+      "price": "",
+      "oldPrice": "",
+      "description": "",
+      "model": "",
+      "category": "",
+      "sizes": [],
+      "imageUrl": "https://i.imgur.com/TG93H0X.jpeg",
+      "videoUrl": "",
+      "vertical": true,
+      "focusY": 46,
+      "fit": "cover",
+      "inStock": true,
+      "active": true,
+      "createdAt": 1794254349854
+    },
+    {
       "id": "lmw9l6kolv0xu",
       "type": "image",
       "companyId": "demo-atelier-0001",
@@ -240,5 +265,5 @@
     }
   ],
   "sections": [],
-  "updatedAt": "2026-11-09T19:25:33.670Z"
+  "updatedAt": "2026-11-09T19:59:34.421Z"
 }
