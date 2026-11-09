@@ -620,7 +620,7 @@ function openLook(id) {
 
 async function openAdmin() {
   if (!window.FA.openAdmin) {
-    await new Promise((res, rej) => { const s = document.createElement('script'); s.src = 'admin.js?v=4'; s.onload = res; s.onerror = () => rej(new Error('admin.js se ni naložil')); document.head.appendChild(s); }).catch(e => FA.toast(e.message));
+    await new Promise((res, rej) => { const s = document.createElement('script'); s.src = 'admin.js?t=' + Date.now(); s.onload = res; s.onerror = () => rej(new Error('admin.js se ni naložil')); document.head.appendChild(s); }).catch(e => FA.toast(e.message));
   }
   if (FA.openAdmin) FA.openAdmin();
 }

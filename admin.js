@@ -39,11 +39,15 @@ const saveCfg = async () => LS.set(KEY, await encryptJson(cfg, pass));
 
 /* ---------- GitHub ---------- */
 async function gh(path, opts = {}, raw = false) {
-  const r = await fetch(`https://api.github.com/repos/${cfg.owner}/${cfg.repo}/${path}`, {
-    ...opts,
-    cache: 'no-store',
-    headers: { Authorization: `Bearer ${cfg.token}`, Accept: raw ? 'application/vnd.github.raw+json' : 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28', ...(opts.headers || {}) }
-  });
+  if (/[^\x21-\x7e]/.test(cfg.token)) throw new Error('Token vsebuje nedovoljene znake (presledek, nova vrstica ali posebni znak). Prilepi ga znova.');
+  let r;
+  try {
+    r = await fetch(`https://api.github.com/repos/${encodeURIComponent(cfg.owner)}/${encodeURIComponent(cfg.repo)}/${path}`, {
+      ...opts,
+      cache: 'no-store',
+      headers: { Authorization: `Bearer ${cfg.token}`, Accept: raw ? 'application/vnd.github.raw+json' : 'application/vnd.github+json', ...(opts.headers || {}) }
+    });
+  } catch (e) { throw new Error(`Povezava z GitHubom ni uspela (${e.message}). Preveri uporabnika »${cfg.owner}«, repozitorij »${cfg.repo}« in token.`); }
   if (!r.ok) { const t = await r.json().catch(() => ({})); throw new Error(`GitHub ${r.status}: ${t.message || r.statusText}`); }
   return raw ? r.text() : r.json();
 }
@@ -151,11 +155,11 @@ function renderSetup() {
   root.innerHTML = authWrap(`
     <h1>Admin</h1>
     <form class="form" id="f-setup" autocomplete="off" style="margin-top:18px">
-      ${auto ? `<input type="hidden" name="owner" value="${esc(host)}"><input type="hidden" name="repo" value="${esc(repo)}">` : `<div class="two"><label>GitHub uporabnik *<input name="owner" required></label><label>Repozitorij *<input name="repo" required></label></div>`}
+      <div class="two"><label>GitHub uporabnik *<input name="owner" value="${esc(host)}" required></label><label>Repozitorij *<input name="repo" value="${esc(repo)}" required></label></div>
       <input type="hidden" name="branch" value="main"><input type="hidden" name="imgur" value="">
       <label>GitHub token *<input name="token" type="password" placeholder="github_pat_…" required autocomplete="off"></label>
-      <label>Novo geslo za admin *<input name="pw" type="password" minlength="6" required autocomplete="new-password"></label>
-      <label>Ponovi geslo *<input name="pw2" type="password" minlength="6" required autocomplete="new-password"></label>
+      <label>Novo geslo za admin *<input name="pw" type="password" required autocomplete="new-password"></label>
+      <label>Ponovi geslo *<input name="pw2" type="password" required autocomplete="new-password"></label>
       <p class="err" id="er"></p>
       <button class="btn primary block" type="submit">Shrani in vstopi</button>
     </form>`);
@@ -165,7 +169,11 @@ function renderSetup() {
     const f = e.target.elements, er = $('#er', root), btn = $('button[type=submit]', root);
     er.textContent = '';
     if (f.pw.value !== f.pw2.value) { er.textContent = 'Gesli se ne ujemata.'; return; }
-    const c = { owner: f.owner.value.trim(), repo: f.repo.value.trim(), branch: f.branch.value.trim() || 'main', token: f.token.value.trim(), imgurId: f.imgur.value.trim() };
+    const clean = v => v.trim().replace(/^https?:\/\/github\.com\//i, '').replace(/\.git$/i, '').replace(/^\/+|\/+$/g, '');
+    let ow = clean(f.owner.value), rp = clean(f.repo.value);
+    if (rp.includes('/')) { const p = rp.split('/'); if (!ow) ow = p[0]; rp = p[1]; }
+    if (ow.includes('/')) { const p = ow.split('/'); ow = p[0]; if (!rp || rp === 'index.html') rp = p[1] || rp; }
+    const c = { owner: ow, repo: rp, branch: f.branch.value.trim() || 'main', token: f.token.value.replace(/\s+/g, ''), imgurId: f.imgur.value.trim() };
     btn.disabled = true; btn.textContent = 'Preverjam…';
     try {
       cfg = c; pass = f.pw.value;
@@ -550,7 +558,7 @@ function viewSettings() {
     </form>
   </div>
   <div class="a-sec"><h3>Varnost</h3>
-    <form class="form" id="f-pw" autocomplete="off"><label>Novo geslo za admin<input name="pw" type="password" minlength="6" autocomplete="new-password"></label><p class="err" id="er3"></p><button class="btn" type="submit">Spremeni geslo</button></form>
+    <form class="form" id="f-pw" autocomplete="off"><label>Novo geslo za admin<input name="pw" type="password" autocomplete="new-password"></label><p class="err" id="er3"></p><button class="btn" type="submit">Spremeni geslo</button></form>
     <div class="row-b" style="margin-top:16px"><button class="btn" id="logout">Odjava</button><button class="btn danger" id="wipe">Izbriši shranjene podatke na tej napravi</button></div>
   </div>`;
   const v = view();
@@ -576,7 +584,7 @@ function viewSettings() {
   };
   $('#f-pw', v).onsubmit = async e => {
     e.preventDefault(); const pw = e.target.elements.pw.value; const er = $('#er3', v);
-    if (pw.length < 6) { er.textContent = 'Vsaj 6 znakov.'; return; }
+    if (!pw) { er.textContent = "Vpiši geslo."; return; }
     pass = pw; await saveCfg(); e.target.reset(); er.textContent = ''; FA.toast('Geslo spremenjeno');
   };
   $('#logout', v).onclick = async () => { if (dirty) await publish(); cfg = null; pass = null; closeAdmin(); };
