@@ -33,7 +33,7 @@
       "ages": [],
       "titleEn": "",
       "descriptionEn": "",
-      "title": "https://i.imgur.com/7J4PIj3.jpeg",
+      "title": "v naravi",
       "sku": "",
       "price": "",
       "oldPrice": "",
@@ -41,7 +41,7 @@
       "model": "",
       "category": "",
       "sizes": [],
-      "imageUrl": "",
+      "imageUrl": "https://i.imgur.com/7J4PIj3.jpeg",
       "videoUrl": "",
       "vertical": true,
       "focusY": 50,
@@ -168,5 +168,5 @@
     }
   ],
   "sections": [],
-  "updatedAt": "2026-11-09T17:54:39.939Z"
+  "updatedAt": "2026-11-09T17:54:58.814Z"
 }
