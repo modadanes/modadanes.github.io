@@ -73,6 +73,31 @@
       "createdAt": 1794255001344
     },
     {
+      "id": "lmw9ozlya41u8",
+      "type": "image",
+      "companyId": "podjetje-nakit-1-s6f3",
+      "section": "clothes",
+      "ages": [],
+      "titleEn": "",
+      "descriptionEn": "",
+      "title": "nakit 5",
+      "sku": "",
+      "price": 53,
+      "oldPrice": "",
+      "description": "",
+      "model": "",
+      "category": "",
+      "sizes": [],
+      "imageUrl": "https://i.imgur.com/nT1SljY.jpeg",
+      "videoUrl": "",
+      "vertical": true,
+      "focusY": 50,
+      "fit": "cover",
+      "inStock": true,
+      "active": true,
+      "createdAt": 1794254812642
+    },
+    {
       "id": "lmw9p2gk0ywqd",
       "type": "image",
       "companyId": "podjetje-nakit-1-s6f3",
@@ -121,31 +146,6 @@
       "inStock": true,
       "active": true,
       "createdAt": 1794254857345
-    },
-    {
-      "id": "lmw9ozlya41u8",
-      "type": "image",
-      "companyId": "podjetje-nakit-1-s6f3",
-      "section": "clothes",
-      "ages": [],
-      "titleEn": "",
-      "descriptionEn": "",
-      "title": "nakit 5",
-      "sku": "",
-      "price": 53,
-      "oldPrice": "",
-      "description": "",
-      "model": "",
-      "category": "",
-      "sizes": [],
-      "imageUrl": "https://i.imgur.com/nT1SljY.jpeg",
-      "videoUrl": "",
-      "vertical": true,
-      "focusY": 50,
-      "fit": "cover",
-      "inStock": true,
-      "active": true,
-      "createdAt": 1794254812642
     },
     {
       "id": "lmw9oyfrlxy5e",
@@ -539,6 +539,61 @@
       "descriptionEn": "Sample description: two-piece set in earthy tones."
     }
   ],
-  "sections": [],
-  "updatedAt": "2026-11-09T20:28:48.621Z"
+  "sections": [
+    {
+      "id": "clothes",
+      "name": "Oblačila",
+      "ages": true,
+      "cats": [
+        "Obleka",
+        "Zgornji deli",
+        "Hlače",
+        "Krila",
+        "Jakne in plašči",
+        "Kompleti",
+        "Športna oblačila",
+        "Kopalke",
+        "Dodatki",
+        "Obutev"
+      ]
+    },
+    {
+      "id": "cosmetics",
+      "name": "Kozmetika",
+      "cats": [
+        "Nega obraza",
+        "Ličila",
+        "Nega las",
+        "Nega telesa",
+        "Dišave",
+        "Nega nohtov"
+      ]
+    },
+    {
+      "id": "tools",
+      "name": "Kozmetični pripomočki",
+      "cats": [
+        "Čopiči in gobice",
+        "Pincete in škarjice",
+        "Ogledala",
+        "Sušilniki in likalniki za lase",
+        "Torbice za kozmetiko",
+        "Pripomočki za nego kože"
+      ]
+    },
+    {
+      "id": "jewelry",
+      "name": "Nakit za ženske",
+      "cats": [
+        "Ogrlice",
+        "Uhani",
+        "Zapestnice",
+        "Prstani",
+        "Broške",
+        "Kompleti nakita",
+        "Ure"
+      ]
+    }
+  ],
+  "updatedAt": "2026-11-10T10:27:55.566Z"
 }
