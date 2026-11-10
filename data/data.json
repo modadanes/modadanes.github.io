@@ -101,7 +101,7 @@
       "id": "lmw9p2gk0ywqd",
       "type": "image",
       "companyId": "podjetje-nakit-1-s6f3",
-      "section": "clothes",
+      "section": "jewelry",
       "ages": [],
       "titleEn": "",
       "descriptionEn": "",
@@ -111,7 +111,7 @@
       "oldPrice": "",
       "description": "",
       "model": "",
-      "category": "",
+      "category": "Ogrlice",
       "sizes": [],
       "imageUrl": "https://i.imgur.com/p1i0pyS.jpeg",
       "videoUrl": "",
@@ -595,5 +595,5 @@
       ]
     }
   ],
-  "updatedAt": "2026-11-10T10:28:11.717Z"
+  "updatedAt": "2026-11-10T10:28:41.841Z"
 }
